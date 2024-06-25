@@ -26,8 +26,8 @@ def lambda_handler(event, context):
     message = {"Subject": {"Data": subject}, "Body": {"Html": {"Data": body}}}
 
     response = client.send_email(
-        Source="jassu.563@gmail.com",
-        Destination={"ToAddresses": ["jassu.563@gmail.com"]},
+        Source="j******3@gmail.com",
+        Destination={"ToAddresses": ["j******3@gmail.com"]},
         Message=message,
     )
 

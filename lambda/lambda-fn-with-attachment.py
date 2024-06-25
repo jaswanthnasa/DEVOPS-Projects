@@ -28,8 +28,8 @@ def lambda_handler(event, context):
     s3_client.download_file(bucket, key, download_path)
 
     # Email parameters
-    sender = 'jassu.563@gmail.com'
-    recipient = 'jassu.563@gmail.com'
+    sender = 'j******3@gmail.com'
+    recipient = 'j******3@gmail.com'
     subject = 'File from S3 Bucket'
     body_text = 'Please find the attached file from S3.'
 
