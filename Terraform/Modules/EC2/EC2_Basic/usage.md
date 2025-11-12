@@ -22,3 +22,19 @@ output "aws_instance_id" {
   value = module.ec2.aws_instance_id
 }
 ```
+
+#### Alternatively we can keep release version in seperate lcoals.tf file
+
+  ```
+  locals {
+  vpc_module_version = "v1.0.0"
+  vpc_module_source  = "git::https://github.com/org/repo.git?ref=${local.vpc_module_version}"
+}
+
+============
+
+module "vpc" {
+  source = local.vpc_module_source
+}
+
+  ```
