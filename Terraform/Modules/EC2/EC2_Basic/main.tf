@@ -40,8 +40,8 @@ resource "aws_instance" "t2_micro_instance" {
   instance_type = var.instance_type
 
   tags = {
-    Name        = "AmazonLinux2-T2Micro"
-    Environment = "Demo"
+    Name        = var.tag_Name
+    Environment = var.tag_Environment
   }
 }
 
