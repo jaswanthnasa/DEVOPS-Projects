@@ -71,8 +71,8 @@ A complete, production-ready Terraform project for deploying Amazon EKS clusters
 ### 1. Clone and Setup
 
 ```bash
-git clone <repository-url>
-cd terraform-s3-project
+git clone https://github.com/jaswanthnasa/DEVOPS-Projects.git
+cd DEVOPS-Projects/Terraform/Modules/Terraform-EKS-project-using-AmazonQ
 ```
 
 ### 2. Configure Backend (Optional but Recommended)
