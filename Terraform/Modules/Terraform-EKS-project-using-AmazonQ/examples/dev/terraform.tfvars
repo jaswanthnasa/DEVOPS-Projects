@@ -1,0 +1,109 @@
+# Development Environment Configuration
+aws_region   = "us-east-1"
+environment  = "dev"
+project_name = "eks-cluster"
+cluster_name = "eks-cluster-dev"
+
+# Network Configuration
+vpc_cidr             = "10.0.0.0/16"
+az_count            = 3
+enable_nat_gateway  = true
+single_nat_gateway  = true  # Cost optimization for dev
+enable_vpc_flow_logs = false
+
+# EKS Configuration
+cluster_version                          = "1.28"
+cluster_endpoint_private_access          = true
+cluster_endpoint_public_access           = true
+cluster_endpoint_public_access_cidrs     = ["0.0.0.0/0"]
+enable_cluster_logging                   = true
+cluster_log_types                        = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+enable_fargate                           = false
+
+# Node Groups - Development sizing
+node_groups = {
+  system = {
+    instance_types = ["t3.medium"]
+    ami_type       = "AL2_x86_64"
+    capacity_type  = "ON_DEMAND"
+    min_size       = 1
+    max_size       = 3
+    desired_size   = 2
+    disk_size      = 20
+    labels = {
+      role = "system"
+    }
+    taints = []
+  }
+  workload = {
+    instance_types = ["t3.large"]
+    ami_type       = "AL2_x86_64"
+    capacity_type  = "SPOT"
+    min_size       = 0
+    max_size       = 5
+    desired_size   = 1
+    disk_size      = 50
+    labels = {
+      role = "workload"
+    }
+    taints = []
+  }
+}
+
+# Addons Configuration
+addons = {
+  vpc_cni = {
+    enabled = true
+    version = "v1.15.1-eksbuild.1"
+    values  = {}
+  }
+  kube_proxy = {
+    enabled = true
+    version = "v1.28.2-eksbuild.2"
+    values  = {}
+  }
+  coredns = {
+    enabled = true
+    version = "v1.10.1-eksbuild.5"
+    values  = {}
+  }
+  ebs_csi_driver = {
+    enabled = true
+    version = "v1.24.0-eksbuild.1"
+    values  = {}
+  }
+  aws_load_balancer_controller = {
+    enabled = true
+    version = "1.6.2"
+    values  = {}
+  }
+  cluster_autoscaler = {
+    enabled = true
+    version = "9.29.0"
+    values  = {}
+  }
+  metrics_server = {
+    enabled = true
+    version = "3.11.0"
+    values  = {}
+  }
+  fluent_bit = {
+    enabled = true
+    version = "0.46.7"
+    values  = {}
+  }
+}
+
+# Security
+create_kms_key = true
+kms_key_id     = ""
+
+# Tags
+tags = {
+  Project     = "eks-cluster"
+  Environment = "dev"
+  ManagedBy   = "terraform"
+  Team        = "platform"
+  CostCenter  = "engineering"
+  Owner       = "devops-team"
+}
